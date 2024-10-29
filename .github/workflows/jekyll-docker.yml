@@ -13,14 +13,20 @@ jobs:
     steps:
     - uses: actions/checkout@v4  # Clona el repositorio
 
+    - name: Verify source folder exists
+      run: |
+        if not exist .\public (
+          echo "Error: 'public' folder not found" && exit 1
+        )
+
     - name: Copy site files to XAMPP htdocs
       run: |
         xcopy .\public C:\xampp\htdocs\ejmeploAjax /E /I /Y
 
     - name: Verify site is deployed
       run: |
-        if exist C:\xampp\htdocs\EjemploAjax\index.php (
-          echo "Deployment successful: index.php found!"
+        if exist C:\xampp\htdocs\ejmeploAjax\index.html (
+          echo "Deployment successful: index.html found!"
         ) else (
           echo "Deployment failed: index.html not found" && exit 1
         )
