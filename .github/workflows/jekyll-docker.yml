@@ -24,7 +24,7 @@ jobs:
     - name: Copy site files to XAMPP htdocs
       shell: pwsh
       run: |
-        xcopy .\public C:\xampp\htdocs\ejmeploAjax /E /I /Y
+        xcopy C:\xampp\htdocs\ejmeploAjax /E /I /Y
 
     - name: Verify site is deployed
       shell: pwsh
