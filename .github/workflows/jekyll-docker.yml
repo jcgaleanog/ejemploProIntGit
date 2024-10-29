@@ -1,0 +1,26 @@
+name: Static Site CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4  # Clona el repositorio
+
+    - name: Copy site files to XAMPP htdocs
+      run: |
+        xcopy .\public C:\xampp\htdocs\ejmeploAjax /E /I /Y
+
+    - name: Verify site is deployed
+      run: |
+        if exist C:\xampp\htdocs\EjemploAjax\index.php (
+          echo "Deployment successful: index.php found!"
+        ) else (
+          echo "Deployment failed: index.html not found" && exit 1
+        )
